@@ -81,50 +81,13 @@ _________________________________________________________ -->
             </div>
 
             <div class="col-md-9">
-                <div class="box info-bar">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-4 products-showing">
-                            <div id="totalProducts"></div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-12  products-number-sort">
-                            <div class="row">
-                                <form class="form-inline">
-                                    <div class="col-md-12 col-sm-12">
-                                        <div class="products-sort-by">
-                                            <strong>Sort by</strong>
-                                            <select name="sort-by"
-                                                    class="form-control">
-                                                <option>Price</option>
-                                                <option>Name</option>
-                                                <option>Sales first</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                
                 <!-- *** PRODUCTS *** -->
 
                 <div id="row products">
                     <div id="products"></div>
                 </div>
                 <!-- /.products -->
-
-                <div class="pages">
-
-                    <!--<p class="loadMore">-->
-                    <!--<a href="#" class="btn btn-primary btn-lg"><i-->
-                    <!--class="fa fa-chevron-down"></i> Load more</a>-->
-                    <!--</p>-->
-
-                    <ul id="pagination" class="pagination">
-                    </ul>
-                </div>
-
 
             </div>
             <!-- /.col-md-9 -->
@@ -173,7 +136,43 @@ _________________________________________________________ -->
 
 				$('#searchQuery').html(searchQuery);
 
-                
+                $.getJSON('/search', {q: searchQuery}, function (data) {
+                    if (data != null && data.length > 0) {
+                        $.each(data, function (index, element) {
+                            $('#products').append('<div class="col-md-4 col-sm-6">\
+                            <div class="product">\
+                                    <div class="flip-container">\
+                                        <div class="flipper">\
+                                            <div class="front">\
+                                                <a href="detail.html?id=' + element.id + '">\
+                                                    <img src="' + element.imageUrl[0] + '" alt="" class="img-responsive">\
+                                                </a>\
+                                            </div>\
+                                            <div class="back">\
+                                                <a href="detail.html?id=' + element.id + '">\
+                                                    <img src="' + element.imageUrl[1] + '" alt="" class="img-responsive">\
+                                                </a>\
+                                            </div>\
+                                        </div>\
+                                    </div>\
+                                    <a href="detail.html?id=' + element.id + '" class="invisible">\
+                                        <img src="img/product1.jpg" alt="" class="img-responsive">\
+                                    </a>\
+                                    <div class="text">\
+                                        <h3><a href="detail.html?id=' + element.id + '">' + element.name + '</a></h3>\
+                                        <p class="price">$' + element.price + '</p>\
+                                        <p class="buttons">\
+                                            <a href="detail.html?id=' + element.id + '" class="btn btn-default">View detail</a>\
+                                            <a href="#" onclick="addToCart(\'' + element.id + '\')" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>\
+                                        </p>\
+                                    </div>\
+                                </div>\
+                            </div>');
+                        });
+                    } else {
+                    	$('#products').append('No products match your search.');
+                    }
+                });
             } );
 
 </script>

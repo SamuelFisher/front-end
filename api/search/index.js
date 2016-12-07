@@ -8,7 +8,14 @@
     , app       = express()
 
   app.get("/search*", function (req, res, next) {
-    res.json([]);
+    res.json([
+      {
+        id: 1,
+        imageUrl: '',
+        price: 10,
+        name: 'Sock'
+      }
+    ]);
   });
 
   module.exports = app;
