@@ -1,1 +1,6 @@
 /** Your theme modifications here **/
+
+#searchBox {
+	line-height: 70px;
+	margin-left: 10px;
+}
