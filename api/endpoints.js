@@ -11,5 +11,6 @@
     cardsUrl:      "http://user/cards",
     loginUrl:      "http://user/login",
     registerUrl:   "http://user/register",
+    elasticsearchUrl: "http://elasticsearch:9200/sockshop/_search"
   };
 }());

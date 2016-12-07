@@ -137,33 +137,33 @@ _________________________________________________________ -->
 				$('#searchQuery').html(searchQuery);
 
                 $.getJSON('/search', {q: searchQuery}, function (data) {
-                    if (data != null && data.length > 0) {
-                        $.each(data, function (index, element) {
+                    if (data != null && data.hits.hits.length > 0) {
+                        $.each(data.hits.hits, function (index, element) {
                             $('#products').append('<div class="col-md-4 col-sm-6">\
                             <div class="product">\
                                     <div class="flip-container">\
                                         <div class="flipper">\
                                             <div class="front">\
-                                                <a href="detail.html?id=' + element.id + '">\
-                                                    <img src="' + element.imageUrl[0] + '" alt="" class="img-responsive">\
+                                                <a href="detail.html?id=' + element._source.id + '">\
+                                                    <img src="' + element._source.imageUrl[0] + '" alt="" class="img-responsive">\
                                                 </a>\
                                             </div>\
                                             <div class="back">\
-                                                <a href="detail.html?id=' + element.id + '">\
-                                                    <img src="' + element.imageUrl[1] + '" alt="" class="img-responsive">\
+                                                <a href="detail.html?id=' + element._source.id + '">\
+                                                    <img src="' + element._source.imageUrl[1] + '" alt="" class="img-responsive">\
                                                 </a>\
                                             </div>\
                                         </div>\
                                     </div>\
-                                    <a href="detail.html?id=' + element.id + '" class="invisible">\
+                                    <a href="detail.html?id=' + element._source.id + '" class="invisible">\
                                         <img src="img/product1.jpg" alt="" class="img-responsive">\
                                     </a>\
                                     <div class="text">\
-                                        <h3><a href="detail.html?id=' + element.id + '">' + element.name + '</a></h3>\
-                                        <p class="price">$' + element.price + '</p>\
+                                        <h3><a href="detail.html?id=' + element._source.id + '">' + element._source.name + '</a></h3>\
+                                        <p class="price">$' + element._source.price + '</p>\
                                         <p class="buttons">\
-                                            <a href="detail.html?id=' + element.id + '" class="btn btn-default">View detail</a>\
-                                            <a href="#" onclick="addToCart(\'' + element.id + '\')" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>\
+                                            <a href="detail.html?id=' + element._source.id + '" class="btn btn-default">View detail</a>\
+                                            <a href="#" onclick="addToCart(\'' + element._source.id + '\')" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to cart</a>\
                                         </p>\
                                     </div>\
                                 </div>\

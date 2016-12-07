@@ -1,6 +1,7 @@
 (function (){
   'use strict';
 
+  var qs = require('querystring');
   var express   = require("express")
     , request   = require("request")
     , endpoints = require("../endpoints")
@@ -8,14 +9,10 @@
     , app       = express()
 
   app.get("/search*", function (req, res, next) {
-    res.json([
-      {
-        id: 1,
-        imageUrl: '',
-        price: 10,
-        name: 'Sock'
-      }
-    ]);
+    var str = req.url.split('?')[1];
+    var query = qs.parse(str).q;
+    var url = endpoints.elasticsearchUrl + "?q=" + query;
+    helpers.simpleHttpRequest(url, res, next);
   });
 
   module.exports = app;
